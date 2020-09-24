@@ -2,7 +2,7 @@ import React from 'react'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import { connect } from 'react-redux'
-import { fetchSpellData } from '../actions'
+import { fetchSpellListData } from '../actions'
 
 const ClassDropdown = (props) => {
     const options = []
@@ -14,7 +14,7 @@ const ClassDropdown = (props) => {
     
     const onSelect = (e) => {
         selectedOption = e.value
-        props.fetchSpellData(selectedOption.toLowerCase())     
+        props.fetchSpellListData(selectedOption.toLowerCase())     
     }
 
     return (
@@ -34,4 +34,4 @@ const mapStateToProps = (state) => {
         spellbook: state.spellbook
     }
 }
-export default connect(mapStateToProps, { fetchSpellData })(ClassDropdown)
+export default connect(mapStateToProps, { fetchSpellListData })(ClassDropdown)

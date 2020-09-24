@@ -5,13 +5,14 @@ import { fetchClassData } from './actions'
 import ClassDropdown from './components/ClassDropdown'
 
 import './App.css';
+import SpellDropdown from './components/SpellDropdown';
+import SpellCard from './components/SpellCard';
 
 // function App(props) {
 const App = (props) => {
   useEffect(() => {
     props.fetchClassData();
   }, [])
-  console.log("class_list",props.class_list, "spellbook", props.spellbook)
   return (
     <div className="App">
       <div className="header">
@@ -21,11 +22,20 @@ const App = (props) => {
         ) : props.error ? (
         <div style={{ color:'red'}}>{props.error}</div>
         ) : (
-        <ClassDropdown />
+          <>
+            <ClassDropdown />
+            {props.spellbook.length > 0 ? (
+              <>
+                <SpellDropdown />
+              </>
+            ) : (
+              <p>Please select a Class</p>
+            )}    
+          </>
         )}
       </div>
-      <div>
-
+      <div className="body">
+                  <SpellCard />
       </div>
     </div>
   );
@@ -34,7 +44,8 @@ const mapStateToProps = (state) => {
   return {
     class_list: state.class_list,
     spellbook : state.spellbook,
-    is_loading_data: state.is_loading_data,
+    spell_data: state.spell_data,
+    is_loading_class_data: state.is_loading_class_data,
     error: state.error
   }
 }
